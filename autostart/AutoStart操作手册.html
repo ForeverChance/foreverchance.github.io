@@ -400,8 +400,12 @@
 }
 
 .markdown-body ul li.task-list-item.checked {
-  text-decoration: line-through;
-  color: #bdbdbd;
+  text-decoration-line: line-through;
+  color: #6e6e6e;
+}
+
+.markdown-body ul li.task-list-item:not(.checked) {
+  color: initial;
 }
 
 .markdown-body ul li.task-list-item::before {
@@ -451,7 +455,6 @@
 }
 
 .markdown-body table {
-  display: block;
   width: 100%;
   overflow: auto;
 }
@@ -479,6 +482,11 @@
   max-width: 100%;
   box-sizing: initial;
   background-color: #fff;
+}
+
+.markdown-body p > img {
+  display: block;
+  margin: 0 auto;
 }
 
 .markdown-body img[align=right] {
@@ -533,6 +541,7 @@
 }
 
 .markdown-body mark {
+  display: inline-flex;
   background-color: #fff8c5;
 }
           
@@ -548,6 +557,7 @@
 <p><strong>操作</strong>：启动应用后执行的一些简单的、有序的操作，比如鼠标点击、快捷键触发</p>
 <p><strong>最大等待时间</strong>：程序点击启动后到开始执行操作的最大等待时间，0(表示默认15秒)。</p>
 <p><strong>操作间隔</strong>：前一个操作开始执行到后一个操作开始执行的时间差，默认1.5秒</p>
+<p><strong>键入文本</strong>：将该操作的文本内容复制并执行拷贝</p>
 <p><strong>【】</strong>：标明操作目标。例如：【程序】</p>
 <p><strong>「」</strong>:标明操作方式。例如：「双击」</p>
 <h1>操作一波</h1>
@@ -688,6 +698,23 @@
 <p><img src="3d2388a5ee4b100bbc978d125847cd68.png" alt="截图"></p>
 </li>
 </ul>
+</li>
+<li>
+<p>修改操作完成后可以直接在该操作后直接追加新操作</p>
+</li>
+</ul>
+<ol start="7">
+<li>问题反馈</li>
+</ol>
+<ul>
+<li>
+<p>错误日志</p>
+<p><img src="0796793eb3ad74a444e8c45759b6c569.png" alt="截图"></p>
+<p><img src="6a5144520cbd6a4d2c098c1d4aa4a2ec.png" alt="截图"></p>
+</li>
+<li>
+<p>QQ群</p>
+<p><img src="6eb66ff295788f6a04d58628df6d68a6.png" alt="AutoStart群二维码.png"></p>
 </li>
 </ul>
 
