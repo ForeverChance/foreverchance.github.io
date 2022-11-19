@@ -114,6 +114,6 @@
   ![截图](0796793eb3ad74a444e8c45759b6c569.png)
 
   ![截图](6a5144520cbd6a4d2c098c1d4aa4a2ec.png)
-- QQ群
+- TIM
 
-  ![AutoStart群二维码.png](6eb66ff295788f6a04d58628df6d68a6.png)
+  ![AutoStart群二维码.png](1a5cf0bc41854ed70a7d3be68f7c4c6b.png)
