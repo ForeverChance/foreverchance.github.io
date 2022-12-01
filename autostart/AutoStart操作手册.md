@@ -117,3 +117,7 @@
 - TIM
 
   ![AutoStart群二维码.png](1a5cf0bc41854ed70a7d3be68f7c4c6b.png)
+
+# 常见问题
+
+- 如果遇到某些程序操作未执行，可以尝试使用管理员权限启动 uTools
