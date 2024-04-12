@@ -1,0 +1,39 @@
+<svg width="48" height="48" viewBox="0 0 12.7 12.7" xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="d">
+            <stop style="stop-color:#31322c;stop-opacity:1" offset=".558"/>
+            <stop style="stop-color:#31322c;stop-opacity:0" offset="1"/>
+        </linearGradient>
+        <linearGradient id="c">
+            <stop style="stop-color:#31322c;stop-opacity:1" offset="0"/>
+            <stop style="stop-color:#31322c;stop-opacity:0" offset="1"/>
+        </linearGradient>
+        <linearGradient id="b">
+            <stop style="stop-color:#31322c;stop-opacity:.76999998" offset=".139"/>
+            <stop style="stop-color:#31322c;stop-opacity:0" offset="1"/>
+        </linearGradient>
+        <linearGradient id="a">
+            <stop style="stop-color:#31322c;stop-opacity:.69999999" offset=".159"/>
+            <stop style="stop-color:#31322c;stop-opacity:0" offset="1"/>
+        </linearGradient>
+        <linearGradient xlink:href="#b" id="e" x1="7.358" y1="-6.325" x2="11.122" y2="-6.325"
+                        gradientUnits="userSpaceOnUse"/>
+        <linearGradient xlink:href="#d" id="f" x1="5.567" y1="6.615" x2="7.125" y2="6.615"
+                        gradientUnits="userSpaceOnUse"/>
+    </defs>
+    <path style="fill:none;fill-opacity:1;stroke:#32788a;stroke-width:.264583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:.264583,.529167;stroke-dashoffset:0;paint-order:normal;stop-color:#000"
+          d="M3.633 10.966s2.114-1.12 2.114-3.695M9.067 10.966S6.953 9.846 6.953 7.27"/>
+    <path style="fill:url(#e);stroke-width:.264583;stroke-linecap:round;stroke-linejoin:round;stop-color:#000"
+          transform="rotate(90)"
+          d="M7.358-6.956c1.962 0 3.462-1.67 3.764-2.194v5.65c-.308-.533-1.808-2.245-3.764-2.245Z"/>
+    <g>
+        <path style="fill:none;fill-opacity:.797872;stroke:#c0ad5e;stroke-width:.714375;stroke-dasharray:none;paint-order:markers fill stroke;stop-color:#000;stroke-linejoin:round;stroke-linecap:round"
+              d="M5.136 1.962c-.088.127-3.006 2.477-3.006 2.477v6.375-3.297l2.185-.007M7.564 1.962c.087.127 3.006 2.477 3.006 2.477v6.375H8.385"/>
+    </g>
+    <g aria-label="8"
+       style="font-size:3.175px;fill:url(#f);stroke-width:.264583;stroke-linecap:round;stroke-linejoin:round;stop-color:#000">
+        <circle style="fill:#000;fill-opacity:1;stroke:none;stroke-width:.0700044;stroke-linecap:round;stroke-linejoin:round;stop-color:#000"
+                cx="6.35" cy="6.482" r=".132"/>
+    </g>
+</svg>

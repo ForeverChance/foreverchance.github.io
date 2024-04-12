@@ -1,0 +1,727 @@
+<!doctype html>
+      <html>
+      <head>
+        <meta charset="utf-8"/>
+        <title>AutoStart操作手册</title>
+        
+        <style>
+          html, body { margin: 0; padding: 0; background-color: #ffffff; }
+          .markdown-body { box-sizing: border-box; min-width: 200px; max-width: 980px; margin: 0 auto; padding: 45px; }
+          @media (max-width: 767px) { .markdown-body { padding: 15px; } }
+          .markdown-body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.5;
+  color: #24292e;
+  font-family: system-ui, -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;;
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.markdown-body details {
+  display: block;
+}
+
+.markdown-body summary {
+  display: list-item;
+}
+
+.markdown-body a {
+  background-color: initial;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline-width: 0;
+}
+
+.markdown-body strong {
+  font-weight: inherit;
+  font-weight: bolder;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: .67em 0;
+}
+
+.markdown-body img {
+  border-style: none;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre {
+  font-family: monospace,monospace;
+  font-size: 1em;
+}
+
+.markdown-body hr {
+  box-sizing: initial;
+  height: 0;
+  overflow: visible;
+}
+
+.markdown-body input {
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body input {
+  overflow: visible;
+}
+
+.markdown-body [type=checkbox] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body * {
+  box-sizing: border-box;
+}
+
+.markdown-body input {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.markdown-body a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.markdown-body strong {
+  font-weight: 600;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #dfe2e5;
+}
+
+.markdown-body hr:after,
+.markdown-body hr:before {
+  display: table;
+  content: "";
+}
+
+.markdown-body hr:after {
+  clear: both;
+}
+
+.markdown-body table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body details summary {
+  cursor: pointer;
+}
+
+.markdown-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #d1d5da;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body h1 {
+  font-size: 32px;
+}
+
+.markdown-body h1,
+.markdown-body h2 {
+  font-weight: 600;
+}
+
+.markdown-body h2 {
+  font-size: 24px;
+}
+
+.markdown-body h3 {
+  font-size: 20px;
+}
+
+.markdown-body h3,
+.markdown-body h4 {
+  font-weight: 600;
+}
+
+.markdown-body h4 {
+  font-size: 16px;
+}
+
+.markdown-body h5 {
+  font-size: 14px;
+}
+
+.markdown-body h5,
+.markdown-body h6 {
+  font-weight: 600;
+}
+
+.markdown-body h6 {
+  font-size: 12px;
+}
+
+.markdown-body p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ol,
+.markdown-body ul {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ol ol ol,
+.markdown-body ol ul ol,
+.markdown-body ul ol ol,
+.markdown-body ul ul ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code,
+.markdown-body pre {
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  font-size: 12px;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body input::-webkit-inner-spin-button,
+.markdown-body input::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.markdown-body :checked+.radio-label {
+  position: relative;
+  z-index: 1;
+  border-color: #0366d6;
+}
+
+.markdown-body hr {
+  border-bottom-color: #eee;
+}
+
+.markdown-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #d1d5da;
+}
+
+.markdown-body:after,
+.markdown-body:before {
+  display: table;
+  content: "";
+}
+
+.markdown-body:after {
+  clear: both;
+}
+
+.markdown-body>:first-child {
+  margin-top: 0!important;
+}
+
+.markdown-body>:last-child {
+  margin-bottom: 0!important;
+}
+
+.markdown-body a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.markdown-body blockquote,
+.markdown-body details,
+.markdown-body dl,
+.markdown-body ol,
+.markdown-body p,
+.markdown-body pre,
+.markdown-body table,
+.markdown-body ul {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: .25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #e1e4e8;
+  border: 0;
+}
+
+.markdown-body blockquote {
+  padding: 0 1em;
+  color: #6a737d;
+  border-left: .25em solid #dfe2e5;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+}
+
+.markdown-body h1,
+.markdown-body h2 {
+  padding-bottom: .3em;
+  border-bottom: 1px solid #eaecef;
+}
+
+.markdown-body h2 {
+  font-size: 1.5em;
+}
+
+.markdown-body h3 {
+  font-size: 1.25em;
+}
+
+.markdown-body h4 {
+  font-size: 1em;
+}
+
+.markdown-body h5 {
+  font-size: .875em;
+}
+
+.markdown-body h6 {
+  font-size: .85em;
+  color: #6a737d;
+}
+
+.markdown-body ol,
+.markdown-body ul {
+  padding-left: 2em;
+}
+
+.markdown-body ol ol,
+.markdown-body ol ul,
+.markdown-body ul ol,
+.markdown-body ul ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li {
+  word-wrap: break-all;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body li+li, .markdown-body li > ul {
+  margin-top: .25em;
+}
+
+.markdown-body ul li.task-list-item {
+  position: relative;
+  appearance: none;
+  list-style: none;
+}
+
+.markdown-body ul li.task-list-item.checked {
+  text-decoration-line: line-through;
+  color: #6e6e6e;
+}
+
+.markdown-body ul li.task-list-item:not(.checked) {
+  color: initial;
+}
+
+.markdown-body ul li.task-list-item::before {
+  content: '';
+  width: 13px;
+  height: 13px;
+  background-color: #fff;
+  position: absolute;
+  left: -28px;
+  top: 4px;
+  border-radius: 2px;
+  border: 2px solid #757575;
+}
+
+.markdown-body ul li.task-list-item.checked::before {
+  background-color: #1976d2;
+  border-color: #1976d2;
+}
+
+.markdown-body ul li.task-list-item.checked::after {
+  content: '';
+  position: absolute;
+  left: -22px;
+  top: 5px;
+  width: 4px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body table {
+  width: 100%;
+  overflow: auto;
+}
+
+.markdown-body table th {
+  font-weight: 600;
+}
+
+.markdown-body table td,
+.markdown-body table th {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  box-sizing: initial;
+  background-color: #fff;
+}
+
+.markdown-body p > img {
+  display: block;
+  margin: 0 auto;
+}
+
+.markdown-body img[align=right] {
+  padding-left: 20px;
+}
+
+.markdown-body img[align=left] {
+  padding-right: 20px;
+}
+
+.markdown-body code {
+  padding: .2em .4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f6f8fa;
+  border-radius: 3px;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: initial;
+  border: 0;
+}
+
+.markdown-body mark {
+  display: inline-flex;
+  background-color: #fff8c5;
+}
+          
+        </style>
+      </head>
+      <body>
+        <article class="markdown-body">
+          <h1>目的</h1>
+<p>大概就是为了打开电脑后，懒得手动打开常用软件，让电脑先跑一会儿......</p>
+<h1>定义几个概念</h1>
+<p><strong>计划</strong>：一组程序</p>
+<p><strong>程序</strong>：想让电脑启动的应用等等</p>
+<p><strong>操作</strong>：启动应用后执行的一些简单的、有序的操作，比如鼠标点击、快捷键触发</p>
+<p><strong>最大等待时间</strong>：程序点击启动后到开始执行操作的最大等待时间，0(表示默认15秒)。</p>
+<p><strong>操作间隔</strong>：前一个操作开始执行到后一个操作开始执行的时间差，默认1.5秒</p>
+<p><strong>键入文本</strong>：将该操作的文本内容复制并执行拷贝</p>
+<p><strong>【】</strong>：标明操作目标。例如：【程序】</p>
+<p><strong>「」</strong>:标明操作方式。例如：「双击」</p>
+<h1>操作一波</h1>
+<ol>
+<li>
+<p>添加计划：</p>
+<p><img src="b56f7334a1e7728596628f47dde483dd.png" alt="截图"></p>
+</li>
+<li>
+<p>添加程序：可添加exe、sh后缀的程序或者程序快捷方式。(注意：sh程序可能会一直运行在后台)</p>
+<ol>
+<li>
+<p>拖拽</p>
+<p><img src="26b58099e1753e9f3e494d3d4013617c.png" alt="截图"></p>
+</li>
+<li>
+<p>点击</p>
+<p><img src="bb0c16364cca65922cab0459a73f7936.png" alt="截图"></p>
+</li>
+</ol>
+</li>
+<li>
+<p>添加操作：</p>
+<ol>
+<li>
+<p>鼠标点击操作(蓝底)</p>
+<p><img src="960acd4a00bebbba3bcc2274ec10d13d.png" alt="截图"></p>
+<p><img src="9f3707d973fd1a4c1973dcfaf0900482.png" alt="截图"></p>
+<p><img src="112784621d88e58cf36dae7847fba6dd.png" alt="截图"></p>
+</li>
+<li>
+<p>键盘快捷键操作(绿底)</p>
+<p><img src="271cfe2f2b371ea26c03ffac18a8b9b7.png" alt="截图"></p>
+</li>
+<li>
+<p>键入文本操作(红底)</p>
+<p><img src="dee1d7f343f064b42932ff9b873c92de.png" alt="截图"></p>
+</li>
+<li>
+<p>结果</p>
+<p><img src="6ae4a56e8eea22f8ed9765f87d446603.png" alt="截图"></p>
+</li>
+</ol>
+</li>
+<li>
+<p>启动程序</p>
+<ol>
+<li>
+<p>添加程序后启动</p>
+</li>
+<li>
+<p>带操作启动：启动按钮有绿色边框</p>
+<p><img src="5b9907e74f37ddda56064541739ee178.png" alt="截图"></p>
+</li>
+<li>
+<p>无操作启动：启动按钮无绿色边框</p>
+<p><img src="01392a1c55a8ef82b0148e691c76b644.png" alt="截图"></p>
+</li>
+<li>
+<p>结果</p>
+</li>
+</ol>
+<p><img src="cc7eb3d5b9cea337879927d56187f6b5.png" alt="截图"></p>
+</li>
+<li>
+<p>启动计划</p>
+<p><img src="d00cfc40184e39888314beead5e3ee42.png" alt="截图"></p>
+<p><img src="d792ca40ae306dcd3a396ec615f0a465.png" alt="截图"></p>
+</li>
+<li>
+<p>其他操作</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>修改名称：直接在名称上进行修改</p>
+<ul>
+<li>
+<p>计划</p>
+<p><img src="4b56daf80ebea9c59211df83e958eeb6.png" alt="截图"></p>
+</li>
+<li>
+<p>程序</p>
+<p><img src="fb996f69970aec0c9be694c2604466ee.png" alt="截图"></p>
+</li>
+<li>
+<p>操作</p>
+<p><img src="f1c121d9c671cfad482d7af74cc1287c.png" alt="截图"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>删除操作</p>
+<p><img src="b7742b2f090b0cd28b2675d3d1d5b131.png" alt="截图"></p>
+</li>
+<li>
+<p>配置与禁止启动</p>
+<ul>
+<li>
+<p>配置</p>
+<p><img src="d3c70af9e8adbd17bb5b67ae90e6ee84.png" alt="截图"></p>
+</li>
+<li>
+<p>禁止/恢复启动</p>
+<p><img src="01f289aeb1cd0785e555856c476e51f4.png" alt="截图"></p>
+<p><img src="372088ce303a0293defe5ecf349f5ba5.png" alt="截图"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>修改和删除操作</p>
+<ul>
+<li>
+<p>修改</p>
+<p><img src="914bfb12dc5a84f9d5bef2598c914419.png" alt="截图"></p>
+</li>
+<li>
+<p>删除</p>
+<p><img src="4c018641c7cbd173b099c2327d8e6893.png" alt="截图"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>单个计划中拖拽程序排序</p>
+</li>
+<li>
+<p>两个计划间拖拽复制程序</p>
+</li>
+<li>
+<p>禁用/允许执行操作</p>
+<ul>
+<li>
+<p>允许：带圈表示执行操作启动</p>
+<p><img src="e1d70b3029ee65b7e3cd4d198ad354eb.png" alt="截图"></p>
+</li>
+<li>
+<p>禁用：不带圈表示无操作启动</p>
+<p><img src="3d2388a5ee4b100bbc978d125847cd68.png" alt="截图"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>修改操作完成后可以直接在该操作后直接追加新操作</p>
+</li>
+</ul>
+<ol start="7">
+<li>问题反馈</li>
+</ol>
+<ul>
+<li>
+<p>错误日志</p>
+<p><img src="0796793eb3ad74a444e8c45759b6c569.png" alt="截图"></p>
+<p><img src="6a5144520cbd6a4d2c098c1d4aa4a2ec.png" alt="截图"></p>
+</li>
+<li>
+<p>TIM</p>
+<p><img src="1a5cf0bc41854ed70a7d3be68f7c4c6b.png" alt="`{~X~E_B{I{STFR@AP~R1PV.png"></p>
+</li>
+</ul>
+<h1>常见问题</h1>
+<ul>
+<li>如果遇到某些程序操作未执行，可以尝试使用管理员权限启动 uTools</li>
+</ul>
+
+        </article>
+      </body>
+      </html>

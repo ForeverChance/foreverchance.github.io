@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:@vue="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>T-Regex</title>
+</head>
+<!-- petite-vue -->
+<script type="text/javascript" src="../../common/js/petite-vue.min.js"></script>
+<!-- UIkit -->
+<link rel="stylesheet" href="../../common/css/uikit.min.css"/>
+<script type="text/javascript" src="../../common/js/uikit.min.js"></script>
+<script type="text/javascript" src="../../common/js/uikit-icons.min.js"></script>
+<script type="text/javascript" src="js/regulex.min.js"></script>
+<script type="text/javascript" src="js/core.js"></script>
+<!-- Main -->
+<link rel="stylesheet" href="css/my_uikit.css"/>
+<link rel="stylesheet" href="css/main.css"/>
+<body style="margin: 0;" class="app">
+  <div id="app" @vue:mounted="mounted" @vue:unmounted="unmounted" uk-height-viewport class="uk-padding-small uk-position-relative uk-flex uk-flex-nowrap uk-flex-row">
+    <!-- 左侧收藏 -->
+    <div id="panel-left" class="panel-left uk-flex uk-flex-nowrap uk-flex-column" style="padding-right: 0;">
+      <div>
+        <!-- 搜索框 -->
+        <div class="uk-inline">
+          <input class="uk-search-input" style="padding-right: 27px;" type="search" placeholder="搜索" v-model="favoriteSearchValue">
+          <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon:close" uk-tooltip="清空" @click="favoriteSearchValue = ''"></a>
+        </div>
+      </div>
+      <!-- 收藏列表 -->
+      <div class="favorite-list" style="overflow-y: auto;flex: 1 0 0;">
+        <ul class="uk-list uk-list-collapse">
+          <template v-for="favorite in favoritesShow" :key="favorite.id">
+            <li class="uk-display-block uk-overflow-hidden uk-text-primary uk-text-middle uk-position-relative favorite-li" style="padding: 2px 0;font-size: 14px;cursor: pointer;" @click="userFavorite(favorite)">
+              {{ favorite.name }}
+              <a class="uk-form-icon uk-form-icon-flip favorite-icon" uk-icon="icon:close" @click="deleteFavorite(favorite.id)" uk-tooltip="删除该收藏"></a>
+            </li>
+          </template>
+        </ul>
+        <div class="uk-display-inline">
+          <!-- 重置推荐/所有按钮 -->
+          <button class="uk-button-small uk-button-primary common-button uk-border-rounded" @click="resetCommonFavorites">重置推荐</button>
+          <button class="uk-button-small uk-button-primary common-button uk-border-rounded" @click="resetAllFavorites">重置所有</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel-center uk-flex uk-flex-nowrap uk-flex-column">
+      <div class="uk-text-center uk-hidden@s uk-hidden@m">
+        <h3>正则表达式工具</h3>
+      </div>
+      <!-- 表达式主要部分 -->
+      <div class="uk-padding-small uk-position-relative">
+        <label style="margin-left: 5px;"><input class="uk-checkbox" type="checkbox" name="modifiers" v-model="isGlobal">全局匹配(<b>g</b>)</label>
+        <label style="margin-left: 5px;"><input class="uk-checkbox" type="checkbox" name="modifiers" v-model="isIgnoreCase">忽略大小写(<b>i</b>)</label>
+        <label style="margin-left: 5px;"><input class="uk-checkbox" type="checkbox" name="modifiers" v-model="isMultiline">多行匹配(<b>m</b>)</label>
+        <label style="margin-left: 5px;"><input class="uk-checkbox" type="checkbox" name="modifiers" v-model="isDotAll">点扩展匹配(<b>s</b>)</label>
+        <div class="uk-position-absolute" style="top: 0; right: 0;">
+          <a class="uk-icon-button common-button" uk-tooltip="展示文档" uk-icon="icon:file-text" href="#referenceModal" uk-toggle></a>
+          <a class="uk-icon-button common-button" @click="copyCode" uk-tooltip="复制默认代码" uk-icon="icon:copy"></a>
+          <a class="uk-icon-button common-button" @click="addFavorite" uk-tooltip="添加到收藏" uk-icon="icon:star"></a>
+        </div>
+        <br/>
+        <textarea type="text" v-model="regexValue" class="uk-textarea uk-margin-small-top" rows="2" style="resize: none;"></textarea>
+        <div class="uk-hidden">
+          {{ regexObj }}
+        </div>
+      </div>
+      <div>
+        <div class="uk-padding-small uk-position-relative" style="padding-top: 0;">
+          <ul class="uk-float-left" style="max-width: 100%" uk-tab>
+            <li class="uk-active" @click="codeType = undefined;setTimeout(() => {generateRegexView()}, 5)">
+              <a href="#" style="text-transform: none;">
+                视图
+                <span v-show="showView" class="uk-icon" uk-icon="eye" @click="showView = !showView"></span>
+                <span v-show="!showView" class="uk-icon" uk-icon="eye-slash" @click="showView = !showView"></span>
+              </a>
+            </li>
+            <template v-for="codeOption in codeOptionList" :key="codeOption.type">
+              <li @click="codeType = codeOption.type" @dblclick="setDefaultCodeType(codeOption.type)" uk-tooltip="双击设置为默认">
+                <a href="#" style="text-transform: none;">
+                  <span v-if="codeOption.type === defaultCodeType" uk-icon="icon:tag" v-effect="UIkit.icon($el).svg.then(function(svg) { svg.querySelector('path').style.fill = '#ffee6f'; })"></span>
+                  {{ codeOption.name }}
+                </a>
+              </li>
+            </template>
+          </ul>
+        </div>
+        <div class="uk-padding-small">
+          <!-- 正则表达式图 -->
+          <div v-show="!codeType && showView" style="margin-left: 0; margin-right: 0;min-height: 70px;max-width: 100%;">
+            <div id="regulex_container" style="width: 100%; max-height: 300px;"></div>
+          </div>
+          <!-- 代码 -->
+          <div v-show="!!codeType">
+            <pre style="width: calc(100% - 20px);white-space: pre-wrap;overflow-x: auto;word-wrap: anywhere;"><code>{{ codeContent }}</code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="uk-padding-small uk-position-relative uk-flex uk-flex-nowrap uk-flex-row" style="padding-top: 0;flex: 1 0 0">
+        <!-- 匹配内容和匹配结果 -->
+        <div class="uk-width-3-5 uk-margin-small-right uk-border-rounded uk-position-relative" style="flex: 1; border: 1px solid #2b2b2b">
+          <!-- 匹配内容 -->
+          <div id="matchContentContainer" contenteditable="true" class="uk-position-absolute match-content" style="z-index: 2;" @paste="handleMatchContentPaste($event)"></div>
+          <div id="matchContentContainerShow" v-html="matchContentShow" class="uk-position-absolute match-content " style="z-index: 1;"></div>
+        </div>
+        <div class="uk-width-2-5 match-result uk-border-rounded" style="max-width: 300px;padding: 0 5px;border: 1px solid #2b2b2b">
+          <span class="uk-padding-small"><b class="uk-margin-small-right">{{ matchResult.length }}</b>处匹配结果</span>
+          <br/>
+          <!-- 匹配结果 -->
+          <template v-for="(res,index) in matchResult" :key="index">
+            <span class="uk-margin-small-top">{{ res }}</span>
+            <br/>
+          </template>
+        </div>
+      </div>
+    </div>
+    <!-- modal -->
+    <div id="referenceModal" uk-modal="stack: true">
+      <div class="uk-modal-dialog" style="width: max(400px, 50vw);">
+        <div class="uk-modal-header no-border uk-sticky-fixed">
+          正则字符文档
+          <!-- 搜索框 -->
+          <div class="uk-inline" style="width: 100%;">
+            <input class="uk-search-input" style="padding-right: 27px;" type="search" placeholder="搜索" v-model="referenceSearchValue">
+            <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon:close" uk-tooltip="清空" @click="referenceSearchValue = ''"></a>
+          </div>
+        </div>
+        <div class="uk-modal-body no-border" style="max-height: max(400px, 70vh); overflow: hidden auto;">
+          <!-- 文档内容 -->
+          <table class="uk-table uk-table-hover uk-table-divider">
+            <thead>
+              <tr>
+                <th class="uk-table-shrink">字符</th>
+                <th class="uk-table-expand">描述</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template v-for="item in referenceInfoShow" :key="item.name">
+                <tr v-effect="appendCodeItem($el, item.content)" style="background-color: #FFFFB6;">
+                  <td colspan="2"><b>{{ item.name }}</b></td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script type="module" src="js/main.js"></script>
+</html>
