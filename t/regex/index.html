@@ -102,14 +102,14 @@
           <div id="matchContentContainer" contenteditable="true" class="uk-position-absolute match-content" style="z-index: 2;" @paste="handleMatchContentPaste($event)"></div>
           <div id="matchContentContainerShow" v-html="matchContentShow" class="uk-position-absolute match-content " style="z-index: 1;"></div>
         </div>
-        <div class="uk-width-2-5 match-result uk-border-rounded" style="max-width: 300px;padding: 0 5px;border: 1px solid #2b2b2b">
-          <span class="uk-padding-small"><b class="uk-margin-small-right">{{ matchResult.length }}</b>处匹配结果</span>
-          <br/>
-          <!-- 匹配结果 -->
-          <template v-for="(res,index) in matchResult" :key="index">
-            <span class="uk-margin-small-top">{{ res }}</span>
-            <br/>
-          </template>
+        <div class="uk-width-2-5 uk-border-rounded uk-position-relative" style="border: 1px solid #2b2b2b;">
+          <div id="matchResultContainer" class="uk-position-absolute match-result">
+            <span class="uk-padding-small uk-padding-remove-vertical"><b class="uk-margin-small-right">{{ matchResult.length }}</b>处匹配结果</span>
+            <!-- 匹配结果 -->
+            <template v-for="(res,index) in matchResult" :key="index">
+              <span class="uk-margin-small-top">{{ res }}</span>
+            </template>
+          </div>
         </div>
       </div>
     </div>
