@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:@vue="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:@vue="http://www.w3.org/1999/xhtml" data-theme="theme">
 <head>
   <meta charset="UTF-8">
   <title>T-Regex</title>
@@ -13,8 +13,9 @@
 <script type="text/javascript" src="js/regulex.min.js"></script>
 <script type="text/javascript" src="js/core.js"></script>
 <!-- Main -->
-<link rel="stylesheet" href="css/my_uikit.css"/>
 <link rel="stylesheet" href="css/main.css"/>
+<link rel="stylesheet" href="css/my_uikit_color.css"/>
+<link rel="stylesheet" href="css/my_uikit.css"/>
 <body style="margin: 0;" class="app">
 <div id="app" @vue:mounted="mounted" @vue:unmounted="unmounted" uk-height-viewport class="uk-padding-small uk-position-relative uk-flex uk-flex-nowrap uk-flex-row">
   <!-- 左侧收藏 -->
@@ -38,10 +39,10 @@
       </ul>
       <div class="uk-display-inline">
         <!-- 重置推荐/所有按钮 -->
-        <button class="uk-button-small uk-button-primary common-button uk-border-rounded" @click="resetCommonFavorites">
+        <button class="uk-button-small common-button uk-border-rounded" @click="resetCommonFavorites">
           重置推荐
         </button>
-        <button class="uk-button-small uk-button-primary common-button uk-border-rounded" @click="resetAllFavorites">
+        <button class="uk-button-small common-button uk-border-rounded" @click="resetAllFavorites">
           重置所有
         </button>
       </div>
@@ -57,10 +58,18 @@
       <label style="margin-left: 5px;"><input class="uk-checkbox" type="checkbox" name="modifiers" v-model="isIgnoreCase">忽略大小写(<b>i</b>)</label>
       <label style="margin-left: 5px;"><input class="uk-checkbox" type="checkbox" name="modifiers" v-model="isMultiline">多行匹配(<b>m</b>)</label>
       <label style="margin-left: 5px;"><input class="uk-checkbox" type="checkbox" name="modifiers" v-model="isDotAll">点扩展匹配(<b>s</b>)</label>
-      <div class="uk-position-absolute" style="top: 0; right: 0;">
-        <a class="uk-icon-button common-button" uk-tooltip="展示文档" uk-icon="icon:file-text" href="#referenceModal" uk-toggle></a>
-        <a class="uk-icon-button common-button" @click="copyCode" uk-tooltip="复制默认代码" uk-icon="icon:copy"></a>
-        <a class="uk-icon-button common-button" uk-tooltip="添加到收藏" uk-icon="icon:star" href="#addFavoriteModal" uk-toggle></a>
+      <div class="uk-position-absolute" style="top: 10px; right: 0;">
+        <a class="uk-icon-button icon-button" uk-tooltip="切换主题" uk-icon="icon:theme"></a>
+        <div id="chooseThemeDropDown" uk-dropdown="mode: click">
+          <ul class="uk-list">
+            <li @click="chooseTheme('light')">浅色主题</li>
+            <li @click="chooseTheme('dark')">深色主题</li>
+            <li @click="chooseTheme('follow')">跟随系统</li>
+          </ul>
+        </div>
+        <a class="uk-icon-button icon-button" uk-tooltip="展示文档" uk-icon="icon:file-text" href="#referenceModal" uk-toggle></a>
+        <a class="uk-icon-button icon-button" @click="copyCode" uk-tooltip="复制默认代码" uk-icon="icon:copy"></a>
+        <a class="uk-icon-button icon-button" uk-tooltip="添加到收藏" uk-icon="icon:star" href="#addFavoriteModal" uk-toggle></a>
       </div>
       <br/>
       <textarea type="text" v-model="regexValue" class="uk-textarea uk-margin-small-top" rows="2" style="resize: none;"></textarea>
@@ -101,14 +110,14 @@
     </div>
     <div class="uk-padding-small uk-position-relative uk-flex uk-flex-nowrap uk-flex-row" style="padding-top: 0;flex: 1 0 0">
       <!-- 匹配内容和匹配结果 -->
-      <div class="uk-width-3-5 uk-margin-small-right uk-border-rounded uk-position-relative" style="flex: 1; border: 1px solid #2b2b2b">
+      <div class="uk-width-3-5 uk-margin-small-right uk-border-rounded uk-position-relative" style="flex: 1; border: var(--border-size) solid var(--border-color)">
         <!-- 匹配内容 -->
-        <div id="matchContentContainer" contenteditable="true" class="uk-position-absolute match-content" style="z-index: 2;" @paste="handleMatchContentPaste($event)"></div>
+        <div id="matchContentContainer" contenteditable="true" class="uk-position-absolute match-content" style="z-index: 2;" @paste="handleMatchContentPaste($event)" @input="console.log(111)"></div>
         <div id="matchContentContainerShow" v-html="matchContentShow" class="uk-position-absolute match-content" style="z-index: 1;"></div>
       </div>
-      <div class="uk-width-2-5 uk-border-rounded uk-position-relative" style="border: 1px solid #2b2b2b;">
-        <div v-show="matchGroupLen > 1" class="uk-position-absolute" style="right: 0; top: 0;line-height: 24px;z-index: 1;" uk-tooltip="高亮显示匹配组">
-          <select class="uk-select" v-model="currentGroup" aria-label="匹配组" style="height: 24px; border: 0;color: #6E9BC5;">
+      <div class="uk-width-2-5 uk-border-rounded uk-position-relative" style="border: var(--border-size) solid var(--border-color);">
+        <div v-show="matchGroupLen > 1" class="uk-position-absolute" style="right: 0; top: -2px;line-height: 24px;z-index: 1;" uk-tooltip="高亮显示匹配组">
+          <select class="uk-select" v-model="currentGroup" aria-label="匹配组" style="height: 24px; border: 0;color: var(--highlight-color1);">
             <option :value="0">
               默认
             </option>
@@ -124,7 +133,7 @@
           <span class="uk-padding-small uk-padding-remove-vertical"><div class="uk-margin-small-right uk-display-inline" style="font-weight: bold;">{{ matchResult.length }}</div>处匹配结果</span>
           <!-- 匹配结果 -->
           <template v-for="(res,index) in matchResultShow" :key="index">
-            <span class="uk-margin-small-top" style="border-bottom: 1px solid #2b2b2b" v-html="res"></span>
+            <span class="uk-margin-small-top" style="border-bottom: var(--border-size) solid var(--border-color)" v-html="res"></span>
           </template>
         </div>
       </div>
@@ -134,7 +143,9 @@
   <div id="referenceModal" uk-modal="stack: true">
     <div class="uk-modal-dialog" style="width: max(400px, 50vw);">
       <div class="uk-modal-header no-border uk-sticky-fixed">
-        正则字符文档
+        <div class="uk-text-center">
+          正则字符文档
+        </div>
         <!-- 搜索框 -->
         <div class="uk-inline" style="width: 100%;">
           <input class="uk-search-input" style="padding-right: 27px;" type="search" placeholder="搜索" v-model="referenceSearchValue">
@@ -152,7 +163,7 @@
           </thead>
           <tbody>
           <template v-for="item in referenceInfoShow" :key="item.name">
-            <tr v-effect="appendCodeItem($el, item.content)" style="background-color: #FFFFB6;">
+            <tr v-effect="appendCodeItem($el, item.content)" style="background-color: var(--highlight-color3);color: #000;">
               <td colspan="2"><b>{{ item.name }}</b></td>
             </tr>
           </template>
@@ -167,8 +178,8 @@
         <div class="uk-modal-body uk-position-relative">
           <label style="width: 40px;line-height: 40px;display: inline-block;">名称:</label>
           <input id="overrideFavoriteInput" required type="text" class="uk-input uk-position-absolute" value="" autofocus="" style="z-index: 1;width: calc(100% - 110px);" data-override-favorite-id/>
-          <label class="uk-position-absolute" style="line-height: 40px;display: inline-block;right: 15px;top: 4px;z-index: -1">选择</label>
-          <select class="uk-position-absolute uk-select" aria-label="Select" style="width: calc(100% - 70px);border: 0px;color: #ffffff00;background: none;" uk-tooltip="title: 选择收藏进行覆盖; pos: bottom-right" @change="changeOverrideFavoriteOption($el)">
+          <label class="uk-position-absolute" style="line-height: 40px;display: inline-block;right: 15px;top: 4px;z-index: 0">选择</label>
+          <select id="overrideFavoriteSelect" class="uk-position-absolute uk-select override-select" aria-label="Select" style="width: calc(100% - 70px);border: 0px;color: transparent;background: none;" uk-tooltip="title: 选择收藏进行覆盖; pos: bottom-right" @change="changeOverrideFavoriteOption($el)">
             <option value="" name="">默认不覆盖</option>
             <template v-for="favorite in favorites" :key="favorite.id">
               <option :value="favorite.id" :name="favorite.name">{{ favorite.name }}</option>
