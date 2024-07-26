@@ -3,19 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <title>T-Regex</title>
+  <link rel="stylesheet" href="css/codemirror.min.css">
+  <script src="js/codemirror.min.js"></script>
+  <!-- petite-vue -->
+  <script type="text/javascript" src="../../common/js/petite-vue.min.js"></script>
+  <!-- UIkit -->
+  <link rel="stylesheet" href="../../common/css/uikit.min.css"/>
+  <script type="text/javascript" src="../../common/js/uikit.min.js"></script>
+  <script type="text/javascript" src="../../common/js/uikit-icons.min.js"></script>
+  <script type="text/javascript" src="js/regulex.min.js"></script>
+  <script type="text/javascript" src="js/core.js"></script>
+  <!-- Main -->
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="css/my_uikit_color.css"/>
+  <link rel="stylesheet" href="css/my_uikit.css"/>
+  <link rel="stylesheet" href="css/my_codemirror.css"/>
 </head>
-<!-- petite-vue -->
-<script type="text/javascript" src="../../common/js/petite-vue.min.js"></script>
-<!-- UIkit -->
-<link rel="stylesheet" href="../../common/css/uikit.min.css"/>
-<script type="text/javascript" src="../../common/js/uikit.min.js"></script>
-<script type="text/javascript" src="../../common/js/uikit-icons.min.js"></script>
-<script type="text/javascript" src="js/regulex.min.js"></script>
-<script type="text/javascript" src="js/core.js"></script>
-<!-- Main -->
-<link rel="stylesheet" href="css/main.css"/>
-<link rel="stylesheet" href="css/my_uikit_color.css"/>
-<link rel="stylesheet" href="css/my_uikit.css"/>
 <body style="margin: 0;" class="app">
 <div id="app" @vue:mounted="mounted" @vue:unmounted="unmounted" uk-height-viewport class="uk-padding-small uk-position-relative uk-flex uk-flex-nowrap uk-flex-row">
   <!-- 左侧收藏 -->
@@ -72,7 +75,7 @@
         <a class="uk-icon-button icon-button" uk-tooltip="添加到收藏" uk-icon="icon:star" href="#addFavoriteModal" uk-toggle></a>
       </div>
       <br/>
-      <textarea type="text" v-model="regexValue" class="uk-textarea uk-margin-small-top" rows="2" style="resize: none;"></textarea>
+      <textarea type="text" v-model="regexValue" class="uk-textarea uk-margin-small-top" rows="2" style="resize: none;font-weight: bold;"></textarea>
       <div class="uk-hidden">
         {{ regexObj }}
       </div>
@@ -108,12 +111,12 @@
         </div>
       </div>
     </div>
-    <div class="uk-padding-small uk-position-relative uk-flex uk-flex-nowrap uk-flex-row" style="padding-top: 0;flex: 1 0 0">
+    <div class="uk-padding-small uk-position-relative uk-flex uk-flex-nowrap uk-flex-row" style="padding-top: 0;flex: 1 0 0;overflow: hidden;">
       <!-- 匹配内容和匹配结果 -->
       <div class="uk-width-3-5 uk-margin-small-right uk-border-rounded uk-position-relative" style="flex: 1; border: var(--border-size) solid var(--border-color)">
         <!-- 匹配内容 -->
-        <div id="matchContentContainer" contenteditable="true" class="uk-position-absolute match-content" style="z-index: 2;" @paste="handleMatchContentPaste($event)" @input="console.log(111)"></div>
-        <div id="matchContentContainerShow" v-html="matchContentShow" class="uk-position-absolute match-content" style="z-index: 1;"></div>
+        <textarea id="matchContentContainer" class="uk-position-absolute match-content" v-model="matchContent" style="width: 100%;height: 100%;"></textarea>
+        <div class="uk-hidden">{{ matchContentShow }}</div>
       </div>
       <div class="uk-width-2-5 uk-border-rounded uk-position-relative" style="border: var(--border-size) solid var(--border-color);">
         <div v-show="matchGroupLen > 1" class="uk-position-absolute" style="right: 0; top: -2px;line-height: 24px;z-index: 1;" uk-tooltip="高亮显示匹配组">
@@ -133,7 +136,7 @@
           <span class="uk-padding-small uk-padding-remove-vertical"><div class="uk-margin-small-right uk-display-inline" style="font-weight: bold;">{{ matchResult.length }}</div>处匹配结果</span>
           <!-- 匹配结果 -->
           <template v-for="(res,index) in matchResultShow" :key="index">
-            <span class="uk-margin-small-top" style="border-bottom: var(--border-size) solid var(--border-color)" v-html="res"></span>
+            <span class="uk-margin-small-top match-result-line" style="border-bottom: var(--border-size) solid var(--border-color)" v-html="res"></span>
           </template>
         </div>
       </div>
